@@ -357,11 +357,7 @@
 	<script src="../js/global.js"></script>
 	<script>
 		$(function() {
-			var anlidata = {
-				"type": "manage",
-			    "page":"1",
-			    "limit":"10"
-			}
+			
 			var banerdata = {
 				"type": "banner"
 			}
@@ -369,11 +365,19 @@
 				var banertemplate = "<img src=" + data.data[0].path + ">"
 				$(".service_banner").append(banertemplate)
 			})
-			uitll.getdata("/live?", "get", "json", anlidata, "false", "true", function(data) {
+			function intdata(index){
+				var antype=["live","seek","report"]
+				var anlidata = {
+				"type": antype[index],
+			    "page":"1",
+			    "limit":"10"
+				}
+				uitll.getdata("/live?", "get", "json", anlidata, "false", "true", function(data) {
 				$.each(data.data, function(i,val) {
+				  $(".dyam_outbox").empty()
 				  var year=val.date.substring(9,10)
 				  var month=val.date.substring(0,7)
-                  var template = "<div class='dynam_bigbox'>" +
+	              var template = "<div class='dynam_bigbox'>" +
 						"<div class='dynam_nrbox'>" +
 						"<div class='container'>" +
 						"<div class='row'>" +
@@ -384,7 +388,7 @@
 						"</div>" +
 						"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-11 dynam_wz'>" +
 						"<h1>" + val.title + "</h1>" +
-						"<div class='dt_wzbox'>" + val.content + "</div>" +
+						"<div class='dt_wzbox'><p>" + val.content + "</p></div>" +
 						"</div>" +
 						"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-11 dynam_img'>" +
 						"<img srv=" + val.path + ">" +
@@ -395,9 +399,15 @@
 						"</div>" +
 						"</div>"
 					$(".dyam_outbox").append(template)
-
+					})
 				})
+			}
+			intdata(0)
+			$(".service_nav li").click(function(){
+				$(this).addClass("active").siblings().removeClass("active");
+				intdata($(this).index())
 			})
+			
 		})
 	</script>
 
