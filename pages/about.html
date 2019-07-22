@@ -196,15 +196,31 @@
 						<li>
 							<a href="service.html">良策服务</a><em></em></li>
 						<li>
-							<a href="javascript:;">良策品牌</a><em></em></li>
+							<a href="brand.html">良策品牌</a><em></em></li>
 						<li>
 							<a href="case.html">良策案例</a><em></em></li>
+						<li class="nav_active lice_ziy">
+							<a href="javascript:;">良策资源</a>
+							<em></em>
+							<ul class="nav_xial">
+								<li>
+									<a href="resour_field.html">场地资源</a>
+								</li>
+								<li>
+									<a href="resour_artist.html">艺人资源</a>
+								</li>
+								<li>
+									<a href="resour_media.html">媒体资源</a>
+								</li>
+								<li>
+									<a href="resour_enter.html">企业资源</a>
+								</li>
+							</ul>
+						</li>
 						<li>
-							<a href="javascript:;">良策资源</a><em></em></li>
+							<a href="dynamic.html">良策动态</a><em></em></li>
 						<li>
-							<a href="javascript:;">良策动态</a><em></em></li>
-						<li>
-							<a href="javascript:;">联系我们</a><em></em></li>
+							<a href="contact.html">联系我们</a><em></em></li>
 					</ul>
 					<div class="nav-moblie visible-xs visible-sm">
 						<a href="javascript:;" class="nav_one"></a>
@@ -326,6 +342,7 @@
 			uitll.getdata("/about?", "get", "json", mission, "false", "true", function(data) {
 				$(".miss_wz h2").text(data.data[0].title)
 				$(".miss_wzbox").html(data.data[0].content)
+				$(".miss_img").find("img").attr("src",data.data[0].path)
 			})
 			uitll.getdata("/about?", "get", "json", course, "false", "true", function(data) {
 				$(".about_lic").find("img").attr("src", data.data[0].path)

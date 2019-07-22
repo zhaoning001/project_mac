@@ -43,16 +43,17 @@
 		
 		.dynam_bigbox {
 			width: 100%;
+			background: #F5F5F5;
 		}
 		
 		.dynam_nrbox {
 			width: 100%;
-			background: #F5F5F5;
+			
 			padding: 30px 0;
 			transition: all .6s ease;
 		}
 		
-		.dynam_nrbox:nth-child(2n+2) {
+		.dynam_bigbox:nth-child(2n+2) {
 			background: #FFFFFF;
 		}
 		
@@ -373,9 +374,9 @@
 			    "limit":"10"
 				}
 				uitll.getdata("/live?", "get", "json", anlidata, "false", "true", function(data) {
-				$.each(data.data, function(i,val) {
-				  $(".dyam_outbox").empty()
-				  var year=val.date.substring(9,10)
+					$(".dyam_outbox").empty()
+				$.each(data.data, function(i,val) {	  
+				  var year=val.date.substring(8,11)
 				  var month=val.date.substring(0,7)
 	              var template = "<div class='dynam_bigbox'>" +
 						"<div class='dynam_nrbox'>" +
@@ -391,7 +392,7 @@
 						"<div class='dt_wzbox'><p>" + val.content + "</p></div>" +
 						"</div>" +
 						"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-11 dynam_img'>" +
-						"<img srv=" + val.path + ">" +
+						"<img src=" + val.path + ">" +
 						"</div>" +
 						"</a>" +
 						"</div>" +

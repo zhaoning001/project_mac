@@ -214,6 +214,8 @@
 					<ul class="case_li">
 						
 					</ul>
+					<div class="m-style M-box11"></div>
+					
 				</div>
 			</div>
 		</div>
@@ -234,11 +236,12 @@
 						<li class="col-lg-12 col-md-12 col-xs-12" style="background: url(../img/iocn5.png) no-repeat left center;">版权所有Copyright@2012-2018 LiangCeShiJi. All Rights Reserved 良策世纪 京ICP备09004321号-2</li>
 					</ul>
 					<div class="qw_code col-lg-2 col-md-2  col-xs-12"><img src="../img/code.png" alt=""></div>
-				</div>x`
+				</div>
 			</div>
 		</footer>
 	</body>
 	<script src="../js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../js/page.js" ></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/global.js"></script>
 	<script>
@@ -251,11 +254,33 @@
 				$(".service_banner").append(template)
 				
 			})
-			function nav(index){
+			function smnav(index, pages) {
+				var navdata = ["class1", "class2", "class3", "class4"]
+				var nrdata = {
+					"type": navdata[index],
+					"pages": pages,
+					"limit": "10"
+				}
+				uitll.getdata("/art?", "get", "json", nrdata, "false", "true", function(data) {
+					$(".case_li").empty()
+					$.each(data.data, function(i, val) {
+						var nrtemplate = "<li>" +
+							"<a href='javascript:;' dataid=" + val.id + ">" +
+							"<img src=" + val.path + ">" +
+							"<p>" + val.title + "</p>" +
+							"</a>" +
+							"</li>"
+
+						$(".case_li").append(nrtemplate)
+					});
+				})
+			}
+			
+			function nav(index,pages){
 				var navdata=["class1","class2","class3","class4"]
 				var nrdata={
 					"type":navdata[index],
-					"pages":"1",
+					"pages":pages,
 					"limit":"10"
 				}
 				uitll.getdata("/field?", "get", "json", nrdata, "false", "true", function(data) {
@@ -270,10 +295,22 @@
 					
 					    $(".case_li").append(nrtemplate)
 					});
-					
+					var pages=Math.ceil(data.count/nrdata.limit)
+					$('.M-box11').pagination({
+					        pageCount: pages,
+						    jump: true,
+						    coping: true,
+						    homePage: '首页',
+						    endPage: '末页',
+						    prevContent: '上页',
+						    nextContent: '下页',
+						    callback: function (api) {
+						        smnav(index,api.getCurrent())
+						    }
+					});
 				})
 			}
-			nav(0)
+			nav(0,1)
 			$(".case_title li").click(function(){
 				$(this).addClass("title_active").siblings().removeClass("title_active")
 				nav($(this).index())
