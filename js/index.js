@@ -116,13 +116,6 @@ $(function() {
 	})
 		
 	})
-	
-	
-	
-	
-	
-	
-	
 	// nextauto()
 
 	//  轮播
@@ -135,8 +128,12 @@ $(function() {
 			var telmplat = "<li>" +
 				"<img src=" + val.path + ">" +
 				"</li>"
+			var linetelm="<li></li>"	
 			$(".planting").append(telmplat)
+			$(".plan_line").append(linetelm)
+			
 		})
+		$(".plan_line li").eq(0).addClass("plan_active")
 	})
 
 	//  品牌活动
@@ -147,12 +144,12 @@ $(function() {
 	uitll.getdata("/index?", "get", "json", pindata, "false", "true", function(data) {
 		$.each(data.data, function(i, val) {
 			var paitemplate = "<div class='actimg_box fl'>" +
-				"<a href='javascript:;'>" +
+				"<a href='pages/case_dateil.html?id="+val.id+"'>" +
 					"<img src=" + val.path + " alt='' class='actime_big'>" +
 					"<div class='actimg_zhez animated'>" +
 					"<h1>" + val.title + "</h1>" +
 					"<span>" + "</span>" +
-					"<p>" + val.details + "</p>" +
+					"<p>" + 'view details' + "</p>" +
 					"</div>" +
 				"</a>" +
 				"</div>"
@@ -190,9 +187,9 @@ $(function() {
 			$(".plan_line li").eq(lunindex).addClass("plan_active").siblings().removeClass("plan_active")
 		}, 3000)
 	}
-	lunb()
-	$(".plan_line li").click(function() {
-		var index = $(this).index();
+//	lunb()
+    $(".plan_line").on("click","li",function(){
+    	var index = $(this).index();
 		clearInterval(time)
 		$('.planting').animate({
 			marginLeft: -index * 100 + "%"
@@ -200,8 +197,7 @@ $(function() {
 		$(".plan_line li").eq(index).addClass("plan_active").siblings().removeClass("plan_active")
 		lunindex = index
 		lunb()
-	})
-
+  })
 	//    圆环
 	function create_circle(num, val_num) {
 		let wid = $(window).width()

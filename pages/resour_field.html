@@ -200,7 +200,7 @@
 			</div>
 		</div>
 		<div class="service_banner">
-			<img src="../img/resour/banner1.jpg" alt="">
+			<!--<img src="../img/resour/banner1.jpg" alt="">-->
 		</div>
 		<div class="container">
 			<div class="row">
@@ -212,54 +212,7 @@
 				</ul>
 				<div class="case_nrbox">
 					<ul class="case_li">
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
-						<li class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="javascript:;">
-								<img src="../img/resour/1.jpg" alt="" />
-								<p>人民大会堂</p>
-							</a>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -291,11 +244,39 @@
 	<script>
 		$(function() {
 			var anlidata = {
-				"type": "banner"
+				"type": "field"
 			}
-			uitll.getdata("/cases?", "get", "json", anlidata, "false", "true", function(data) {
+			uitll.getdata("/resource?", "get", "json", anlidata, "false", "true", function(data) {
 				var template = "<img src=" + data.data[0].path + ">"
-//				$(".about_banner").append(template)
+				$(".service_banner").append(template)
+				
+			})
+			function nav(index){
+				var navdata=["class1","class2","class3","class4"]
+				var nrdata={
+					"type":navdata[index],
+					"pages":"1",
+					"limit":"10"
+				}
+				uitll.getdata("/field?", "get", "json", nrdata, "false", "true", function(data) {
+					 $(".case_li").empty()
+					$.each(data.data, function(i,val) {
+						var nrtemplate = "<li class='col-lg-3 col-md-3 col-sm-4 col-xs-6'>"+
+					                    "<a href='resoudie_details.html?id="+val.id+"'>"+
+					                        "<img src=" + val.path + ">"+
+					                        "<p>"+val.title+"</p>"
+					                    +"</a>"
+					                 +"</li>"
+					
+					    $(".case_li").append(nrtemplate)
+					});
+					
+				})
+			}
+			nav(0)
+			$(".case_title li").click(function(){
+				$(this).addClass("title_active").siblings().removeClass("title_active")
+				nav($(this).index())
 			})
 		})
 	</script>
