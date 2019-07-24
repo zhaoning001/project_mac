@@ -116,7 +116,7 @@ body{height: 100%;}
 	.coorper_box li:nth-child(3){margin-right: 0;}
 	.coorper_box li:nth-child(1),.coorper_box li:nth-child(4){margin-left: 2%}
 	.act_title{line-height: 42px;}
-	.planting{height: 350px;}
+	.planting{height: auto;}
 	.xinx_box li{padding-left: 5%;font-size: 18px;}
 	.logobox{width: 150px;height: 38px;margin-top: 21px;}
 	#video{width: 600px;height: 300px;}
@@ -150,7 +150,8 @@ body{height: 100%;}
 	.circle canvas{margin: 0 auto;display: block;}
 	.logobox {margin-left: 2%;}
 	#video{width: 300px;height: 300px;}
-	
+	.Cooperative{height: auto;}
+	.plan_line li{width: 30px;height: 2px;margin-right: 35px;}
 }
 
 
