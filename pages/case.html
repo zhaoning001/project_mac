@@ -304,6 +304,8 @@
 				<ul class="case_nr">
 
 				</ul>
+				<div class="m-style M-box11"></div>
+				
 			</div>
 		</div>
 		<div class="big_logo">
@@ -327,6 +329,7 @@
 		</footer>
 	</body>
 	<script src="../js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../js/page.js" ></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/global.js"></script>
 	<script>
@@ -348,12 +351,13 @@
 				var template = "<img src=" + data.data[0].path + ">"
 				$(".about_banner").append(template)
 			})
-
-			function nav(index) {
+			
+			
+			function smnav(index,pages) {
 				var canarray = ["manage", "product", "activity", "sense"]
 				var navdata = {
 					"type": canarray[index],
-					"page": "1",
+					"page": pages,
 					"limit": "6"
 				}
 				uitll.getdata("/cases?", "get", "json", navdata, "false", "true", function(data) {
@@ -376,7 +380,49 @@
 						}
 				})
 		}
-		nav(0)
+			
+
+			function nav(index,pages) {
+				var canarray = ["manage", "product", "activity", "sense"]
+				var navdata = {
+					"type": canarray[index],
+					"page": pages,
+					"limit": "6"
+				}
+				uitll.getdata("/cases?", "get", "json", navdata, "false", "true", function(data) {
+						$(".case_nr").empty()
+						if(data.data.length > 0) {
+							$.each(data.data, function(i, val) {
+									var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
+										"<a href='case_dateil.html?id="+val.id+"'>" +
+										"<div>" +
+										"<img src=" + val.path + ">" +
+										"<p>" + val.title + "</p>" +
+										"</div>" +
+										'</a>' +
+										"</li>"
+									$(".case_nr").append(template)
+							})
+						}
+						else {
+							$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
+						}
+						var pages=Math.ceil(data.count/navdata.limit)
+						$('.M-box11').pagination({
+						        pageCount: pages,
+							    jump: true,
+							    coping: true,
+							    homePage: '首页',
+							    endPage: '末页',
+							    prevContent: '上页',
+							    nextContent: '下页',
+							    callback: function (api) {
+							        smnav(index,api.getCurrent())
+							    }
+						});
+				})
+		}
+		nav(0,1)
 
 		})
 	</script>

@@ -258,20 +258,20 @@
 				var navdata = ["class1", "class2", "class3", "class4"]
 				var nrdata = {
 					"type": navdata[index],
-					"pages": pages,
-					"limit": "10"
+					"page": pages,
+					"limit": "8"
 				}
-				uitll.getdata("/art?", "get", "json", nrdata, "false", "true", function(data) {
+				uitll.getdata("/field?", "get", "json", nrdata, "false", "true", function(data) {
 					$(".case_li").empty()
-					$.each(data.data, function(i, val) {
-						var nrtemplate = "<li>" +
-							"<a href='javascript:;' dataid=" + val.id + ">" +
-							"<img src=" + val.path + ">" +
-							"<p>" + val.title + "</p>" +
-							"</a>" +
-							"</li>"
-
-						$(".case_li").append(nrtemplate)
+					$.each(data.data, function(i,val) {
+						var nrtemplate = "<li class='col-lg-3 col-md-3 col-sm-4 col-xs-6'>"+
+					                    "<a href='resoudie_details.html?id="+val.id+"'>"+
+					                        "<img src=" + val.path + ">"+
+					                        "<p>"+val.title+"</p>"
+					                    +"</a>"
+					                 +"</li>"
+					
+					    $(".case_li").append(nrtemplate)
 					});
 				})
 			}
@@ -280,8 +280,8 @@
 				var navdata=["class1","class2","class3","class4"]
 				var nrdata={
 					"type":navdata[index],
-					"pages":pages,
-					"limit":"10"
+					"page":pages,
+					"limit":"8"
 				}
 				uitll.getdata("/field?", "get", "json", nrdata, "false", "true", function(data) {
 					 $(".case_li").empty()

@@ -333,6 +333,8 @@
 		<div class="dyam_outbox">
 		
 		</div>
+		<div class="m-style M-box11"></div>
+		
 		<div class="big_logo">
 			<img src="../img/biglogo.png" alt="">
 		</div>
@@ -354,6 +356,7 @@
 		</footer>
 	</body>
 	<script src="../js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../js/page.js" ></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/global.js"></script>
 	<script>
@@ -366,11 +369,50 @@
 				var banertemplate = "<img src=" + data.data[0].path + ">"
 				$(".service_banner").append(banertemplate)
 			})
-			function intdata(index){
+			function smintdata(index,pages){
 				var antype=["live","seek","report"]
 				var anlidata = {
 				"type": antype[index],
-			    "page":"1",
+			    "page":pages,
+			    "limit":"10"
+				}
+				uitll.getdata("/live?", "get", "json", anlidata, "false", "true", function(data) {
+					$(".dyam_outbox").empty()
+					$.each(data.data, function(i,val) {	  
+					  var year=val.date.substring(8,11)
+					  var month=val.date.substring(0,7)
+		              var template = "<div class='dynam_bigbox'>" +
+							"<div class='dynam_nrbox'>" +
+							"<div class='container'>" +
+							"<div class='row'>" +
+							"<a href='dynamic_datails.html?id="+val.id+"'>" +
+							"<div class='col-lg-2 col-md-2 col-sm-2 col-xs-11 time'>" +
+							"<em>" + year + "</em>" +
+							"<span>" + month + "</span>" +
+							"</div>" +
+							"<div class='col-lg-6 col-md-6 col-sm-6 col-xs-11 dynam_wz'>" +
+							"<h1>" + val.title + "</h1>" +
+							"<div class='dt_wzbox'><p>" + val.content + "</p></div>" +
+							"</div>" +
+							"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-11 dynam_img'>" +
+							"<img src=" + val.path + ">" +
+							"</div>" +
+							"</a>" +
+							"</div>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+						$(".dyam_outbox").append(template)
+					})
+				})
+			}
+			
+			
+			function intdata(index,pages){
+				var antype=["live","seek","report"]
+				var anlidata = {
+				"type": antype[index],
+			    "page":pages,
 			    "limit":"10"
 				}
 				uitll.getdata("/live?", "get", "json", anlidata, "false", "true", function(data) {
@@ -401,9 +443,22 @@
 						"</div>"
 					$(".dyam_outbox").append(template)
 					})
+				    var pages=Math.ceil(data.count/anlidata.limit)
+					$('.M-box11').pagination({
+					        pageCount: pages,
+						    jump: true,
+						    coping: true,
+						    homePage: '首页',
+						    endPage: '末页',
+						    prevContent: '上页',
+						    nextContent: '下页',
+						    callback: function (api) {
+						        smintdata(0,api.getCurrent())
+						    }
+					});
 				})
 			}
-			intdata(0)
+			intdata(0,1)
 			$(".service_nav li").click(function(){
 				$(this).addClass("active").siblings().removeClass("active");
 				intdata($(this).index())

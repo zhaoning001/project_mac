@@ -18,7 +18,7 @@
 		.liax_fx ul li p{font-size: 26px;font-weight: 300;}
 		.liax_fx ul li span{font-size: 20px;font-weight: 300;}
 		.liax_fx ul li img{display: block;margin: 0 auto;}
-		.form_box input{width: 100%;height: 48px;border:1px solid rgba(34,24,21,1);margin-bottom: 20px;border-radius:5px ;font-size: 18px;text-indent: 20px;}
+		.form_box input{width: 100%;height: 48px;border:1px solid rgba(34,24,21,1);margin-bottom: 20px;border-radius:5px ;font-size: 18px;text-indent: 20px;color: #000;}
 		.form_box textarea{width: 100%;height: 252px;border:1px solid rgba(34,24,21,1);margin-bottom: 20px;border-radius:5px ;resize:none;font-size: 18px;text-indent: 10px;padding-top: 16px;padding:2%;line-height: 30px;}
 		#tij{width:121px;
 height:50px;
@@ -146,18 +146,18 @@ border-radius:5px;font-size:20px;color: #fff;margin: 0 auto;}
 					 			<ul>
 					 				<li class="lx_fx" style="background: url(../img/contant/iocn1.png) no-repeat left center;">
 					 					<p>联系方式</p>
-					 				    <span>010-66081702 <em> 010-66081708</em></span>
+					 				    <span></span>
 					 				</li>
 					 				<li class="lx_fx" style="background: url(../img/contant/iocn2.png) no-repeat left center;">
 					 					<p>公司邮箱</p>
-					 				    <span>lc7166@163.com</span>
+					 				    <span></span>
 					 				</li>
 					 				<li class="lx_fx" style="background: url(../img/contant/iocn3.png) no-repeat left center;">
 					 					<p>公司地址</p>
-					 				    <span>北京市朝阳区劲松街道南磨房路39号院</span>
+					 				    <span></span>
 					 				</li>
 					 				<li style="padding-left: 0;">
-					 					<img src="../img/contant/code.png" alt="" />
+					 					<img src="" alt="" />
 					 				</li>
 					 			</ul>
 
@@ -218,10 +218,30 @@ border-radius:5px;font-size:20px;color: #fff;margin: 0 auto;}
 			var banerdata = {
 				"type": "banner"
 			}
+			var xinxdata = {
+				"type": "manage",
+				"limit":"4"
+			}
+			var erwmdata = {
+				"type": "pic"
+			}
 			uitll.getdata("/contact?", "get", "json", banerdata, "false", "true", function(data) {
 				var banertemplate = "<img src=" + data.data[0].path + ">"
 				$(".service_banner").append(banertemplate)
 			})
+			uitll.getdata("/contact?", "get", "json", xinxdata, "false", "true", function(data) {
+				$(".liax_fx ul").find("li").eq(0).find("span").text(data.data[0].content)
+				$(".liax_fx ul").find("li").eq(1).find("span").text(data.data[1].content)
+				$(".liax_fx ul").find("li").eq(2).find("span").text(data.data[2].content)
+			})
+			uitll.getdata("/contact?", "get", "json", erwmdata, "false", "true", function(data) {
+				$(".liax_fx ul").find("li").eq(3).find("img").attr("src",data.data[0].path)
+			})
+			
+			
+			
+			
+			
 		   $("#tij").click(function(){
 			   var name=$("#name").val();
 			   var phone=$("#phone").val();

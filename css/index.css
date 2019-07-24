@@ -3,7 +3,7 @@ body{height: 100%;}
 .list_nav{width: 50%;margin: 36px auto 0;}
 .list_nav span{width: 100%;text-align: center;display: block;margin-bottom: 20px;font-size: 20px;}
 .plan_box{width: 100%;overflow: hidden;position: relative;margin-top: 80px;}
-.planting{height: 900px;width: 400%;}
+.planting{height:auto;width: 400%;}
 .planting li{width: 25%;height: 100%;float: left;}
 .plan_line{width: 100%;display:flex;justify-content: center;position: absolute;left: 0;bottom: 5%;}
 .plan_line li{width:50px;height: 4px;background: #fff;margin-right: 50px;cursor: pointer;}
@@ -133,7 +133,7 @@ body{height: 100%;}
 	.coorper_box li:nth-child(2n+2){margin-right: 0}
 	.coorper_box li:nth-child(3){margin-right: 3%;margin-top: 3%}
 	.coorper_box li:nth-child(1),.coorper_box li:nth-child(4){margin-left: 0;}
-	.planting{height: 147px;}
+/*	.planting{height: 147px;}*/
 	.xinx_box li{padding-left:9%;font-size: 15px;background-size: auto 20px;}
 	.three_biglunbo ul li img{height: 169px;}
 	.list_h1{font-size: 24px;}
