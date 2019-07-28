@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>场地资源</title>
+	    <link rel="shortcut icon" type="image/x-icon" href="../img/naviocn.ico" />
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/comm.css" />
 	</head>
@@ -15,11 +16,12 @@
 		}
 		
 		.case_title li {
-			font-size: 24px;
+			font-size: 23px;
 			line-height: 110px;
 			cursor: pointer;
 			position: relative;
 			font-weight: bold;
+			text-align: center;
 		}
 		
 		.case_title li:hover {
@@ -39,7 +41,8 @@
 			border-bottom: 10px solid #C3141C;
 			position: absolute;
 			top: 74px;
-			left: 41px;
+			left: 50%;
+			margin-left: -5px;
 		}
 		
 		.case_li {
@@ -93,14 +96,14 @@
 		
 		@media only screen and (max-width: 768px) {
 			.case_title li {
-				font-size: 22px;
+				font-size: 20px;
 			}
 		}
 		
 		@media only screen and (max-width: 479px) {
 			.case_title li {
 				margin-left: 0;
-				font-size: 20px;
+				font-size: 18px;
 			}
 			.case_li li img {
 				height: 140px;
@@ -205,10 +208,7 @@
 		<div class="container">
 			<div class="row">
 				<ul class="case_title">
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 title_active">分类一</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2">分类二</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2">分类三</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2">分类四</li>
+					
 				</ul>
 				<div class="case_nrbox">
 					<ul class="case_li">
@@ -249,15 +249,25 @@
 			var anlidata = {
 				"type": "field"
 			}
+			uitll.getdata("/menu?", "get", "json", anlidata, "false", "true", function(data) {
+				$.each(data.data,function(i,val){
+					if(i==0){
+						var menutemplate="<li class='col-lg-2 col-md-3 col-xs-6 col-sm-4 title_active' dataid="+val.id+">"+val.name+"</li>"
+					    nav(val.id,1)
+					}else{
+						var menutemplate="<li class='col-lg-2 col-md-3 col-xs-6 col-sm-4' dataid="+val.id+">"+val.name+"</li>"
+					}
+					$(".case_title").append(menutemplate)
+				})
+			})
 			uitll.getdata("/resource?", "get", "json", anlidata, "false", "true", function(data) {
 				var template = "<img src=" + data.data[0].path + ">"
 				$(".service_banner").append(template)
 				
 			})
-			function smnav(index, pages) {
-				var navdata = ["class1", "class2", "class3", "class4"]
+			function smnav(id, pages) {
 				var nrdata = {
-					"type": navdata[index],
+					"type":id,
 					"page": pages,
 					"limit": "8"
 				}
@@ -276,23 +286,21 @@
 				})
 			}
 			
-			function nav(index,pages){
-				var navdata=["class1","class2","class3","class4"]
+			function nav(id,pages){
 				var nrdata={
-					"type":navdata[index],
+					"type":id,
 					"page":pages,
 					"limit":"8"
 				}
 				uitll.getdata("/field?", "get", "json", nrdata, "false", "true", function(data) {
-					 $(".case_li").empty()
+					$(".case_li").empty()
 					$.each(data.data, function(i,val) {
 						var nrtemplate = "<li class='col-lg-3 col-md-3 col-sm-4 col-xs-6'>"+
-					                    "<a href='resoudie_details.html?id="+val.id+"'>"+
-					                        "<img src=" + val.path + ">"+
-					                        "<p>"+val.title+"</p>"
-					                    +"</a>"
-					                 +"</li>"
-					
+						                    "<a href='resoudie_details.html?id="+val.id+"'>"+
+						                        "<img src=" + val.path + ">"+
+						                        "<p>"+val.title+"</p>"
+						                    +"</a>"
+						                 +"</li>"
 					    $(".case_li").append(nrtemplate)
 					});
 					var pages=Math.ceil(data.count/nrdata.limit)
@@ -305,15 +313,15 @@
 						    prevContent: '上页',
 						    nextContent: '下页',
 						    callback: function (api) {
-						        smnav(index,api.getCurrent())
+						        smnav(id,api.getCurrent())
 						    }
 					});
 				})
 			}
-			nav(0,1)
-			$(".case_title li").click(function(){
+			$(".case_title").on("click","li",function(){
 				$(this).addClass("title_active").siblings().removeClass("title_active")
-				nav($(this).index())
+			    var dataid=$(this).attr("dataid")
+				nav(dataid,1)
 			})
 		})
 	</script>

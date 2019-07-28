@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>艺人资源</title>
+	    <link rel="shortcut icon" type="image/x-icon" href="../img/naviocn.ico" />
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/comm.css" />
 	</head>
@@ -20,6 +21,7 @@
 			cursor: pointer;
 			position: relative;
 			font-weight: bold;
+			text-align: center;
 		}
 		
 		.case_title li:hover {
@@ -39,7 +41,8 @@
 			border-bottom: 10px solid #C3141C;
 			position: absolute;
 			top: 74px;
-			left: 41px;
+			left: 50%;
+			margin-left: -5px;
 		}
 		
 		.case_li {
@@ -106,7 +109,7 @@
 		@media only screen and (max-width: 479px) {
 			.case_title li {
 				margin-left: 0;
-				font-size: 20px;
+				font-size: 18px;
 			}
 			.case_li li img {
 				height: 140px;
@@ -229,11 +232,11 @@
 				<img src="../img/resour/close.png" alt="" class="resor_close"/>
 				<img src="../img/resour/yiren2.png" alt="" class="resor_logo"/>
 				<div class="zhe_wz">
-					<h1>王凯简介</h1>
+					<h1></h1>
 					<em></em>
-					<span>brief introduction </span>
+					<span></span>
 					<div class="zhe_wznr">
-						<p>王凯，1982年8月18日出生于湖北武汉，中国内地男演员、歌手，毕业于中央戏剧学院03级表演本科班。2 005年，出演首部电视剧《寒秋》进入娱乐圈。2008年，出演喜剧《丑女无敌》系列。2010年，主演年代剧《知青》。2013年，参演战争剧《北平 无战事》，凭借剧中方孟韦一角，获得第28届中 国电视金鹰奖观众喜爱的男演员奖提名。2014年，凭借法制电影《黄克功案件》获第九届华语青年影像论坛年度新锐男演员 </p>
+						<p></p>
 					</div>
 				</div>
 			</div>
@@ -316,10 +319,7 @@
 		<div class="container">
 			<div class="row">
 				<ul class="case_title">
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 title_active">分类一</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2">分类二</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2">分类三</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-2">分类四</li>
+					
 				</ul>
 				<div class="case_nrbox">
 					<ul class="case_li">
@@ -358,14 +358,26 @@
 			var anlidata = {
 				"type": "art"
 			}
+			uitll.getdata("/menu?", "get", "json", anlidata, "false", "true", function(data) {
+				$.each(data.data,function(i,val){
+					if(i==0){
+						var menutemplate="<li class='col-lg-2 col-md-3 col-xs-6 col-sm-4 title_active' dataid="+val.id+">"+val.name+"</li>"
+					    nav(val.id,1)
+					}else{
+						var menutemplate="<li class='col-lg-2 col-md-3 col-xs-6 col-sm-4' dataid="+val.id+">"+val.name+"</li>"
+					}
+					$(".case_title").append(menutemplate)
+				})
+			})
+			
+			
 			uitll.getdata("/resource?", "get", "json", anlidata, "false", "true", function(data) {
 				var template = "<img src=" + data.data[0].path + ">"
 				$(".service_banner").append(template)
 			})
-			function smnav(index,pages){
-				var navdata=["class1","class2","class3","class4"]
+			function smnav(id,pages){
 				var nrdata={
-					"type":navdata[index],
+					"type":id,
 					"page":pages,
 					"limit":"10"
 				}
@@ -385,10 +397,9 @@
 			}
 			
 			
-			function nav(index,pages){
-				var navdata=["class1","class2","class3","class4"]
+			function nav(id,pages){
 				var nrdata={
-					"type":navdata[index],
+					"type":id,
 					"page":pages,
 					"limit":"10"
 				}
@@ -414,12 +425,11 @@
 						    prevContent: '上页',
 						    nextContent: '下页',
 						    callback: function (api) {
-						        smnav(index,api.getCurrent())
+						        smnav(id,api.getCurrent())
 						    }
 					});
 				})
 			}
-			nav(0,1)
 			$(".case_li").on("click","a",function(){
 				uitll.getdata("/text/"+$(this).attr("dataid"), "get", "json", "", "false", "true", function(data) {
 			   	  	$(".zhez").css("display","flex")
@@ -431,9 +441,10 @@
 			$(".resor_close").click(function(){
 				$(".zhez").css("display","none")
 			})
-			$(".case_title li").click(function(){
+			$(".case_title").on("click","li",function(){
 				$(this).addClass("title_active").siblings().removeClass("title_active")
-				nav($(this).index(),1)
+				var id=$(this).attr("dataid")
+				nav(id,1)
 			})
 			
 			

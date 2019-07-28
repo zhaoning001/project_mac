@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>良策案例</title>
+	    <link rel="shortcut icon" type="image/x-icon" href="../img/naviocn.ico" />
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/comm.css" />
 	</head>
@@ -43,16 +44,21 @@
 		}
 		
 		.case_smlltitle {
-			width: 100%;
-			display: none;
-			justify-content: center;
+			width: 60%;
+			overflow: hidden;
+			display: block;
+            margin: 0 auto;			
 		}
 		
 		.case_smlltitle li {
 			overflow: hidden;
 			margin: 14px 24px;
+			cursor: pointer;
+			float: left;
 		}
-		
+		.case_smlltitle li:hover span{
+			color: #BF1A20;
+		}
 		.case_smlltitle em {
 			display: block;
 			width: 6px;
@@ -124,6 +130,7 @@
 				top: 73px;
 				left: 49px;
 			}
+			.case_smlltitle{width: 75%;}
 		}
 		
 		@media only screen and (max-width: 768px) {
@@ -157,6 +164,7 @@
 			.case_smlltitle em {
 				margin-top: 5px;
 			}
+            .case_smlltitle{width: 84%;}
 		}
 	</style>
 
@@ -240,72 +248,27 @@
 		<div class="container">
 			<div class="row">
 				<ul class="case_title">
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3 col-lg-offset-2 col-md-offset-2  title_active">全部案例</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3">品牌策略</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3">活动策划</li>
-					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3">视觉设计</li>
+					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3 col-lg-offset-2 col-md-offset-2 b_nav title_active">全部案例</li>
+					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3 s_nav">品牌策略</li>
+					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3 s_nav">活动策划</li>
+					<li class="col-lg-2 col-md-2 col-xs-3 col-sm-3 s_nav">视觉设计</li>
 				</ul>
 				<div class="case_smllbox">
 					<ul class="case_smlltitle">
-						<li>
-							<em></em>
-							<span>品牌战略</span>
-						</li>
-						<li>
-							<em></em>
-							<span>整合营销</span>
-						</li>
-						<li>
-							<em></em>
-							<span>企业形象片</span>
-						</li>
-						<li>
-							<em></em>
-							<span>传播策略</span>
-						</li>
+						
 					</ul>
 					<ul class="case_smlltitle">
-						<li>
-							<em></em>
-							<span>品牌战略1</span>
-						</li>
-						<li>
-							<em></em>
-							<span>整合营销</span>
-						</li>
-						<li>
-							<em></em>
-							<span>企业形象片</span>
-						</li>
-						<li>
-							<em></em>
-							<span>传播策略</span>
-						</li>
+						
 					</ul>
 					<ul class="case_smlltitle">
-						<li>
-							<em></em>
-							<span>品牌战略1</span>
-						</li>
-						<li>
-							<em></em>
-							<span>整合营销</span>
-						</li>
-						<li>
-							<em></em>
-							<span>企业形象片</span>
-						</li>
-						<li>
-							<em></em>
-							<span>传播策略</span>
-						</li>
+						
 					</ul>
 				</div>
 				<ul class="case_nr">
 
 				</ul>
 				<div class="m-style M-box11"></div>
-				
+
 			</div>
 		</div>
 		<div class="big_logo">
@@ -329,21 +292,34 @@
 		</footer>
 	</body>
 	<script src="../js/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="../js/page.js" ></script>
+	<script type="text/javascript" src="../js/page.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/global.js"></script>
 	<script>
 		$(function() {
-			$(".case_title li").click(function() {
+			$(".b_nav").click(function() {
 				$(this).addClass("title_active").siblings().removeClass("title_active")
 				nav($(this).index())
-				if($(this).index() > 0) {
-					$(".case_smllbox").css("display", "block")
-					$(".case_smlltitle").eq($(this).index() - 1).css("display", "flex").siblings().css("display", "none")
-				} else {
+//				if($(this).index() > 0) {
+//					$(".case_smllbox").css("display", "block")
+//					$(".case_smlltitle").eq($(this).index() - 1).css("display", "flex").siblings().css("display", "none")
+//					sbmenu($(this).index()-1)
+//				} else {
 					$(".case_smllbox").css("display", "none")
-				}
+//				}
 			})
+			$(".s_nav").mouseenter(function(){
+				    $(this).addClass("title_active").siblings().removeClass("title_active")
+				    $(".case_smllbox").css("display", "block")
+					$(".case_smlltitle").eq($(this).index() - 1).css("display", "block").siblings().css("display", "none")
+					sbmenu($(this).index()-1)
+			})
+			$(".case_smlltitle").on("click","li",function(){
+				var id=$(this).attr("dataid")
+			    var index=$(this).parent().index()
+				listnav(index,id,"1")
+			})
+			
 			var anlidata = {
 				"type": "banner"
 			}
@@ -351,38 +327,95 @@
 				var template = "<img src=" + data.data[0].path + ">"
 				$(".about_banner").append(template)
 			})
-			
-			
-			function smnav(index,pages) {
-				var canarray = ["manage", "product", "activity", "sense"]
+
+			function sbmenu(index) {
+				var sbtupe=["product","activity","sense"]
+				var anlidata = {
+					"type": sbtupe[index]
+				}	
+				uitll.getdata("/menu?", "get", "json", anlidata, "false", "true", function(data) {
+					$(".case_smlltitle").eq(index).empty()
+					$.each(data.data,function(i,val){
+						var sbtempate="<li dataid="+ val.id +">"+
+						                "<em>"+"</em>"+
+						                "<span>"+val.name+"</span>"
+				                 	  +"</li>"
+					    $(".case_smlltitle").eq(index).append(sbtempate)
+					})
+					
+				})
+			}
+			function smlistnav(index,id,pages){
+				var listurl=["/product?","/activity?","/sense?"]
 				var navdata = {
-					"type": canarray[index],
+					"type":id,
 					"page": pages,
 					"limit": "6"
 				}
-				uitll.getdata("/cases?", "get", "json", navdata, "false", "true", function(data) {
-						$(".case_nr").empty()
-						if(data.data.length > 0) {
-							$.each(data.data, function(i, val) {
-									var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
-										"<a href='case_dateil.html?id="+val.id+"'>" +
-										"<div>" +
-										"<img src=" + val.path + ">" +
-										"<p>" + val.title + "</p>" +
-										"</div>" +
-										'</a>' +
-										"</li>"
-									$(".case_nr").append(template)
-							})
-						}
-						else {
-							$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
-						}
+				uitll.getdata(listurl[index], "get", "json", navdata, "false", "true", function(data) {
+					$(".case_nr").empty()
+					if(data.data.length > 0) {
+						$.each(data.data, function(i, val) {
+							var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
+								"<a href='case_dateil.html?id=" + val.id + "'>" +
+								"<div>" +
+								"<img src=" + val.path + ">" +
+								"<p>" + val.title + "</p>" +
+								"</div>" +
+								'</a>' +
+								"</li>"
+							$(".case_nr").append(template)
+						})
+					} else {
+						$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
+					}
 				})
-		}
+			}
+			function listnav(index,id,pages){
+				var listurl=["/product?","/activity?","/sense?"]
+				var navdata = {
+					"type":id,
+					"page": pages,
+					"limit": "6"
+				}
+				uitll.getdata(listurl[index], "get", "json", navdata, "false", "true", function(data) {
+					$(".case_nr").empty()
+					if(data.data.length > 0) {
+						$.each(data.data, function(i, val) {
+							var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
+								"<a href='case_dateil.html?id=" + val.id + "'>" +
+								"<div>" +
+								"<img src=" + val.path + ">" +
+								"<p>" + val.title + "</p>" +
+								"</div>" +
+								'</a>' +
+								"</li>"
+							$(".case_nr").append(template)
+						})
+					} else {
+						$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
+					}
+					var pages = Math.ceil(data.count / navdata.limit)
+					$('.M-box11').pagination({
+						pageCount: pages,
+						jump: true,
+						coping: true,
+						homePage: '首页',
+						endPage: '末页',
+						prevContent: '上页',
+						nextContent: '下页',
+						callback: function(api) {
+							smlistnav(index,id,api.getCurrent())
+						}
+					});
+				})
+			}
+			
+			
+			
 			
 
-			function nav(index,pages) {
+			function smnav(index, pages) {
 				var canarray = ["manage", "product", "activity", "sense"]
 				var navdata = {
 					"type": canarray[index],
@@ -390,39 +423,65 @@
 					"limit": "6"
 				}
 				uitll.getdata("/cases?", "get", "json", navdata, "false", "true", function(data) {
-						$(".case_nr").empty()
-						if(data.data.length > 0) {
-							$.each(data.data, function(i, val) {
-									var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
-										"<a href='case_dateil.html?id="+val.id+"'>" +
-										"<div>" +
-										"<img src=" + val.path + ">" +
-										"<p>" + val.title + "</p>" +
-										"</div>" +
-										'</a>' +
-										"</li>"
-									$(".case_nr").append(template)
-							})
-						}
-						else {
-							$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
-						}
-						var pages=Math.ceil(data.count/navdata.limit)
-						$('.M-box11').pagination({
-						        pageCount: pages,
-							    jump: true,
-							    coping: true,
-							    homePage: '首页',
-							    endPage: '末页',
-							    prevContent: '上页',
-							    nextContent: '下页',
-							    callback: function (api) {
-							        smnav(index,api.getCurrent())
-							    }
-						});
+					$(".case_nr").empty()
+					if(data.data.length > 0) {
+						$.each(data.data, function(i, val) {
+							var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
+								"<a href='case_dateil.html?id=" + val.id + "'>" +
+								"<div>" +
+								"<img src=" + val.path + ">" +
+								"<p>" + val.title + "</p>" +
+								"</div>" +
+								'</a>' +
+								"</li>"
+							$(".case_nr").append(template)
+						})
+					} else {
+						$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
+					}
 				})
-		}
-		nav(0,1)
+			}
+
+			function nav(index, pages) {
+				var canarray = ["manage", "product", "activity", "sense"]
+				var navdata = {
+					"type": canarray[index],
+					"page": pages,
+					"limit": "6"
+				}
+				uitll.getdata("/cases?", "get", "json", navdata, "false", "true", function(data) {
+					$(".case_nr").empty()
+					if(data.data.length > 0) {
+						$.each(data.data, function(i, val) {
+							var template = "<li class='col-lg-4 col-md-4 col-sm-6 col-xs-12'>" +
+								"<a href='case_dateil.html?id=" + val.id + "'>" +
+								"<div>" +
+								"<img src=" + val.path + ">" +
+								"<p>" + val.title + "</p>" +
+								"</div>" +
+								'</a>' +
+								"</li>"
+							$(".case_nr").append(template)
+						})
+					} else {
+						$(".case_nr").append("<p class='not_yet'>暂无内容</p>")
+					}
+					var pages = Math.ceil(data.count / navdata.limit)
+					$('.M-box11').pagination({
+						pageCount: pages,
+						jump: true,
+						coping: true,
+						homePage: '首页',
+						endPage: '末页',
+						prevContent: '上页',
+						nextContent: '下页',
+						callback: function(api) {
+							smnav(index, api.getCurrent())
+						}
+					});
+				})
+			}
+			nav(0, 1)
 
 		})
 	</script>
