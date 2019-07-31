@@ -121,7 +121,9 @@
 		.big_logo {
 			margin-top: 50px;
 		}
-		
+		.caseli_active span{
+			color: #BF1A20 !important;
+		}
 		@media only screen and (max-width: 992px) {
 			.case_title li {
 				font-size: 22px;
@@ -318,6 +320,7 @@
 				var id=$(this).attr("dataid")
 			    var index=$(this).parent().index()
 				listnav(index,id,"1")
+				$(this).addClass("caseli_active").siblings().removeClass("caseli_active")
 			})
 			
 			var anlidata = {

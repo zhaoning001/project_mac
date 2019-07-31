@@ -139,7 +139,7 @@ $(function() {
 	//  品牌活动
 	var pindata = {
 		"type": "activity",
-		"limit": "8"
+		"limit": "6"
 	}
 	uitll.getdata("/index?", "get", "json", pindata, "false", "true", function(data) {
 		$.each(data.data, function(i, val) {
@@ -244,9 +244,9 @@ $(function() {
 	var rog_box, circle, contentzn, content_enlish, contentznspan;
 	$(document).scroll(function() {
 		if($(document).scrollTop() > Math.round($(".three_linb").offset().top)) {
-			$(".nav_box").css("background", "rgba(34,34,34,.8)")
+			$(".nav_box").css("background", "rgba(22,22,22,.8)")
 		} else {
-			$(".nav_box").css("background", "rgba(34,34,34,1)")
+			$(".nav_box").css("background", "rgba(22,22,22,1)")
 		}
 		let wid = $(window).width()
 		if(wid < 768) {
