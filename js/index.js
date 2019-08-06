@@ -138,18 +138,18 @@ $(function() {
 
 	//  品牌活动
 	var pindata = {
-		"type": "activity",
+		"type": "cases",
 		"limit": "6"
 	}
 	uitll.getdata("/index?", "get", "json", pindata, "false", "true", function(data) {
 		$.each(data.data, function(i, val) {
 			var paitemplate = "<div class='actimg_box fl'>" +
-				"<a href='pages/case_dateil.html?id="+val.id+"'>" +
+				"<a href='pages/case.html?id="+val.url+"'>" +
 					"<img src=" + val.path + " alt='' class='actime_big'>" +
-					"<div class='actimg_zhez animated'>" +
-					"<h1>" + val.title + "</h1>" +
+					"<div class='actimg_zhez'>" +
+					"<h1>" + val.name + "</h1>" +
 					"<span>" + "</span>" +
-					"<p>" + 'view details' + "</p>" +
+					"<p>" + 'view type' + "</p>" +
 					"</div>" +
 				"</a>" +
 				"</div>"
@@ -159,7 +159,7 @@ $(function() {
 	//  合作伙伴
 	var hedata = {
 		"type": "frends",
-		"limit": "12"
+		"limit": "18"
 	}
 	uitll.getdata("/index?", "get", "json", hedata, "false", "true", function(data) {
 		$.each(data.data, function(i, val) {
@@ -360,11 +360,9 @@ $(function() {
 	}
 	//hover效果
 	$(".activity_img").on("mouseenter", ".actimg_box  a", function() {
-		$(this).find(".actimg_zhez").css("opacity", "1")
-		$(this).find(".actimg_zhez").removeClass("fadeOutDown").addClass("fadeInUp")
+		$(this).find("span").css("background","#bf1a20")
 	})
 	$(".activity_img").on("mouseleave", ".actimg_box  a", function() {
-		$(this).find(".actimg_zhez").css("opacity", "0")
-		$(this).find(".actimg_zhez").removeClass("fadeInUp").addClass("fadeOutDown")
+		$(this).find("span").css("background","#fff")
 	})
 })
