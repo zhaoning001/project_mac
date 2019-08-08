@@ -1,5 +1,5 @@
 $(function() {
-		//  视频
+	//  视频
 	var videodata = {
 		"type": "video",
 		"limit": "4"
@@ -8,113 +8,114 @@ $(function() {
 		$.each(data.data, function(i, val) {
 			var template = "<li class='list" + (i + 1) + "'>" +
 				"<img src=" + val.url + " oncontextmenu='return false'>" +
-					"<div class='mask'>" +
-					  "<img src='img/video.png' alt='' video="+val.path+" class='bof'>" +
-					"</div>" +
+				"<div class='mask'>" +
+				"<img src='img/video.png' alt='' video=" + val.path + " class='bof'>" +
+				"</div>" +
 				"</li>"
-				
+
 			var template1 = "<li class='col-xs-10'>" +
 				"<img src=" + val.url + " oncontextmenu='return false'>" +
-					"<div class='mask1'>" +
-					  "<img src='img/video.png' alt='' video="+val.path+" class='bof'>" +
-					"</div>" +
-				"</li>"	
-			$(".imglist ul")	.append(template)
-			$(".three_biglunbo ul")	.append(template1)
+				"<div class='mask1'>" +
+				"<img src='img/video.png' alt='' video=" + val.path + " class='bof'>" +
+				"</div>" +
+				"</li>"
+			$(".imglist ul").append(template)
+			$(".three_biglunbo ul").append(template1)
 		})
 		//1:设置按钮的颜色；
-	//1.1获取当前应该变色的按钮的索引值
-	//1.2找到该元素并设置一个绿色
-	var index = 0; //默认情况下第一个按钮变成红色
-	var aListName=[]
-//	var aListName = ['list1', 'list2', 'list3']
-	var aLi = $(".imglist ul li")
-    for(var index=0;index<aLi.length;index++){
-    	    aListName.push("list"+(index+1))
-    	    var emtemplat="<span>"+"<em></em>"+"</span>"
-    	    $(".lineb").append(emtemplat)
-    }
-	var aSpan = $(".lineb span") //把所有的按钮放到一个数组里
-	function setLineBColor(index1) {
-		for(var i = 0, len = aSpan.length; i < len; i++) {
-			aSpan[i].style.background = '#ccc';
-			aSpan[index1].style.background = '#BF1A20';
+		//1.1获取当前应该变色的按钮的索引值
+		//1.2找到该元素并设置一个绿色
+		var index = 0; //默认情况下第一个按钮变成红色
+		var aListName = []
+		//	var aListName = ['list1', 'list2', 'list3']
+		var aLi = $(".imglist ul li")
+		for(var index = 0; index < aLi.length; index++) {
+			aListName.push("list" + (index + 1))
+			var emtemplat = "<span>" + "<em></em>" + "</span>"
+			$(".lineb").append(emtemplat)
 		}
-	}
-	setLineBColor(0)
-	function nextPic() {
-		aListName.unshift(aListName[aLi.length-1]); //把数组最后一个名字复制并插入到第一个位置来
-		
-		aListName.pop() //删除最后一个值
-		for(var i = 0, len = aLi.length; i < len; i++) {
-			aLi[i].setAttribute('class', aListName[i]);
+		var aSpan = $(".lineb span") //把所有的按钮放到一个数组里
+		function setLineBColor(index1) {
+			for(var i = 0, len = aSpan.length; i < len; i++) {
+				aSpan[i].style.background = '#ccc';
+				aSpan[index1].style.background = '#BF1A20';
+			}
 		}
-		index++;
-		if(index == aLi.length) {
-			
-			index = 0;
-		}
-	}
+		setLineBColor(0)
 
-	function prePic() {
-		aListName.push(aListName[0]);
-		aListName.shift();
-		for(var i = 0, len = aListName.length; i < len; i++) {
-			aLi[i].setAttribute('class', aListName[i]);
-//			 index--;
-//			 if(index<0){
-//			 	index=2;
-//			 }
-//			 setLineBColor();
-		}
-	}
-	var imgList = document.querySelector(".imglist");
-	aLi.click(function() {
-		clearInterval(nextime)
-		var allindex = $(this).index()
-		if($(this).attr("class") == "list3") {
-			nextPic();
-		} else if($(this).attr("class") == "list1") {
-			prePic();
-		}
-		if($(this).index() == 0) {
-			
-			allindex = aLi.length
-		} else if($(this).index() == aLi.length) {
-			
-			allindex = 1
-		}
-		index = allindex - 1
-		setLineBColor(allindex - 1)
-		// nextauto() 
-	})
-	var nextime;
+		function nextPic() {
+			aListName.unshift(aListName[aLi.length - 1]); //把数组最后一个名字复制并插入到第一个位置来
 
-	function nextauto() {
-		nextime = setInterval(function() {
-			nextPic()
-		}, 3000)
-	}		
-//  播放视频		
-     $(".mask").find("img").click(function(){
-     	var videurl=$(this).attr("video");
-     	var Media = document.getElementById("video");
-     	$(".zhez").css("display",'flex')
-     	$("#video").attr("src",videurl)
-     	Media.play(); //播放
-     })
-     $(".mask1").find("img").click(function(){
-     	var videurl=$(this).attr("video");
-     	var Media = document.getElementById("video");
-     	$(".zhez").css("display",'flex')
-     	$("#video").attr("src",videurl)
-     	Media.play(); //播放
-     })
-	$("#close").click(function(){
-		$(".zhez").css("display",'none')
-     	$("#video").attr("src","")
-	})
-		
+			aListName.pop() //删除最后一个值
+			for(var i = 0, len = aLi.length; i < len; i++) {
+				aLi[i].setAttribute('class', aListName[i]);
+			}
+			index++;
+			if(index == aLi.length) {
+
+				index = 0;
+			}
+		}
+
+		function prePic() {
+			aListName.push(aListName[0]);
+			aListName.shift();
+			for(var i = 0, len = aListName.length; i < len; i++) {
+				aLi[i].setAttribute('class', aListName[i]);
+				//			 index--;
+				//			 if(index<0){
+				//			 	index=2;
+				//			 }
+				//			 setLineBColor();
+			}
+		}
+		var imgList = document.querySelector(".imglist");
+		aLi.click(function() {
+			clearInterval(nextime)
+			var allindex = $(this).index()
+			if($(this).attr("class") == "list3") {
+				nextPic();
+			} else if($(this).attr("class") == "list1") {
+				prePic();
+			}
+			if($(this).index() == 0) {
+
+				allindex = aLi.length
+			} else if($(this).index() == aLi.length) {
+
+				allindex = 1
+			}
+			index = allindex - 1
+			setLineBColor(allindex - 1)
+			// nextauto() 
+		})
+		var nextime;
+
+		function nextauto() {
+			nextime = setInterval(function() {
+				nextPic()
+			}, 3000)
+		}
+		//  播放视频		
+		$(".mask").find("img").click(function() {
+			var videurl = $(this).attr("video");
+			var Media = document.getElementById("video");
+			$(".zhez").css("display", 'flex')
+			$("#video").attr("src", videurl)
+			Media.play(); //播放
+		})
+		$(".mask1").find("img").click(function() {
+			var videurl = $(this).attr("video");
+			var Media = document.getElementById("video");
+			$(".zhez").css("display", 'flex')
+			$("#video").attr("src", videurl)
+			Media.play(); //播放
+		})
+		$("#close").click(function() {
+			$(".zhez").css("display", 'none')
+			$("#video").attr("src", "")
+		})
+
 	})
 	// nextauto()
 
@@ -128,10 +129,10 @@ $(function() {
 			var telmplat = "<li>" +
 				"<img src=" + val.path + ">" +
 				"</li>"
-			var linetelm="<li></li>"	
+			var linetelm = "<li></li>"
 			$(".planting").append(telmplat)
 			$(".plan_line").append(linetelm)
-			
+
 		})
 		$(".plan_line li").eq(0).addClass("plan_active")
 	})
@@ -144,13 +145,13 @@ $(function() {
 	uitll.getdata("/index?", "get", "json", pindata, "false", "true", function(data) {
 		$.each(data.data, function(i, val) {
 			var paitemplate = "<div class='actimg_box fl'>" +
-				"<a href='pages/case.html?id="+val.url+"'>" +
-					"<img src=" + val.path + " alt='' class='actime_big'>" +
-					"<div class='actimg_zhez'>" +
-					"<h1>" + val.name + "</h1>" +
-					"<span>" + "</span>" +
-					"<p>" + 'view type' + "</p>" +
-					"</div>" +
+				"<a href='pages/case.html?id=" + val.url + "'>" +
+				"<img src=" + val.path + " alt='' class='actime_big'>" +
+				"<div class='actimg_zhez'>" +
+				"<h1>" + val.name + "</h1>" +
+				"<span>" + "</span>" +
+				"<p>" + 'view type' + "</p>" +
+				"</div>" +
 				"</a>" +
 				"</div>"
 			$(".activity_img").append(paitemplate)
@@ -159,15 +160,15 @@ $(function() {
 	//  合作伙伴
 	var hedata = {
 		"type": "frends",
-		"limit": "18"
+		"limit": "24"
 	}
 	uitll.getdata("/index?", "get", "json", hedata, "false", "true", function(data) {
 		$.each(data.data, function(i, val) {
 			var paitemplate = "<li>" +
-				   "<a href='javascript:;'>"+
-				     "<img src=" + val.path + ">" 
-				   +"</a>"
-				"</li>"
+				"<a href='javascript:;'>" +
+				"<img src=" + val.path + ">" +
+				"</a>"
+			"</li>"
 			$(".coorper_box").append(paitemplate)
 		})
 	})
@@ -187,9 +188,9 @@ $(function() {
 			$(".plan_line li").eq(lunindex).addClass("plan_active").siblings().removeClass("plan_active")
 		}, 3000)
 	}
-//	lunb()
-    $(".plan_line").on("click","li",function(){
-    	var index = $(this).index();
+	//	lunb()
+	$(".plan_line").on("click", "li", function() {
+		var index = $(this).index();
 		clearInterval(time)
 		$('.planting').animate({
 			marginLeft: -index * 100 + "%"
@@ -197,7 +198,7 @@ $(function() {
 		$(".plan_line li").eq(index).addClass("plan_active").siblings().removeClass("plan_active")
 		lunindex = index
 		lunb()
-  })
+	})
 	//    圆环
 	function create_circle(num, val_num) {
 		let wid = $(window).width()
@@ -360,9 +361,9 @@ $(function() {
 	}
 	//hover效果
 	$(".activity_img").on("mouseenter", ".actimg_box  a", function() {
-		$(this).find("span").css("background","#bf1a20")
+		$(this).find("span").css("background", "#bf1a20")
 	})
 	$(".activity_img").on("mouseleave", ".actimg_box  a", function() {
-		$(this).find("span").css("background","#fff")
+		$(this).find("span").css("background", "#fff")
 	})
 })
