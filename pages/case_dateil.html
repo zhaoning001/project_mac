@@ -12,14 +12,14 @@
 </head>
 <style>
     .nr_box{margin-bottom: 64px;}
-    .nr_box h1{font-size: 36px;width: 100%;font-weight: normal;text-align: center;margin-top: 70px;}
-    .nr_title{overflow:hidden;border-bottom:1px solid #BF1A20;}
-    .nr_title li{font-size: 18px;margin-left: 70px;float: left;margin-bottom: 16px;}
+    .nr_box>h1{font-size: 36px;width: 100%;font-weight: normal;text-align: center;margin-top: 70px;}
+    .nr_title{overflow:hidden;border-bottom:1px solid #BF1A20;display: flex;justify-content: center;}
+    .nr_title li{font-size: 18px;margin-left: 70px;margin-bottom: 16px;}
     .nr_title li em{margin-left: 4px;}
     .line{display: block;width: 100px;height: 6px;background: #BF1A20;margin: 20px auto 36px;}
     .nr_wz{margin-top:63px;}
-    .nr_wz p{font-size: 20px;line-height: 48px;text-indent: 40px;}
-    .nr_wz img{width: 100%;margin-top: 40px;}
+    .nr_wz p{font-size: 17px;line-height: 48px;width: 100%;display: block;overflow: hidden;margin-top: 10px;}
+    .nr_wz img{width: 100%;}
     @media only screen and (max-width: 1199px) {
        .nr_title li{margin-left: 51px;}
 	}
@@ -33,10 +33,12 @@
 	}
 
 	@media only screen and (max-width: 768px) {
-        .nr_wz p{width: 90%;margin: 0 auto;}
+        .nr_wz p{width: 90%;margin: 10px auto 0;}
 	}
 
 	@media only screen and (max-width: 479px) {
+       .nr_title li{margin-left: 19px;}
+		
 	}
     
     
@@ -122,7 +124,7 @@
             <h1></h1>
             <span class="line"></span>
             <ul class="nr_title">
-                <li>发布日期：<em></em></li>
+                <li>活动日期：<em></em></li>
                 <li>活动地点：<em></em></li>
                 <li>活动人数：<em></em></li>
             </ul>
@@ -140,27 +142,19 @@
 			<img src="../img/biglogo.png" alt="">
 		</div>
     <footer>
-        <div class="container">
-            <div class="row footer_row">
-                <ul class="xinx_box col-lg-10 col-md-10 col-sm-12">
-                    <li class="col-lg-5 col-md-6  col-xs-12"
-                        style="background: url(../img/iocn1.png) no-repeat left center;">联系电话：010-66081702 010-66081708
-                    </li>
-                    <li class="col-lg-5 col-md-6  col-xs-12"
-                        style="background: url(../img/iocn2.png) no-repeat left center;">联系电话：13810331642 13011182699
-                    </li>
-                    <li class="col-lg-5 col-md-6  col-xs-12"
-                        style="background: url(../img/iocn3.png) no-repeat left center;">北京市朝阳区劲松街道南磨房路39号院</li>
-                    <li class="col-lg-5 col-md-6  col-xs-12"
-                        style="background: url(../img/iocn4.png) no-repeat left center;">E-mail：lc7166@163.com</li>
-                    <li class="col-lg-12 col-md-12 col-xs-12"
-                        style="background: url(../img/iocn5.png) no-repeat left center;">版权所有Copyright@2012-2018
-                        LiangCeShiJi. All Rights Reserved 良策世纪 京ICP备09004321号-2</li>
-                </ul>
-                <div class="qw_code col-lg-2 col-md-2  col-xs-12"><img src="../img/code.png" alt=""></div>
-            </div>x`
-        </div>
-    </footer>
+			<div class="container">
+				<div class="row footer_row">
+					<ul class="xinx_box col-lg-10 col-md-10 col-sm-12">
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn1.png) no-repeat left center;">贵宾专线：010-66081702&nbsp&nbsp&nbsp 010-66081708</li>
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn2.png) no-repeat left center;">24小时在线：13810331642&nbsp&nbsp 13011182699</li>
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn3.png) no-repeat left center;">北京市朝阳区南磨房路39号院</li>
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn4.png) no-repeat left center;">E-mail：lc7166@163.com</li>
+						<li class="col-lg-12 col-md-12 col-xs-12" style="background: url(../img/iocn5.png) no-repeat left center;">版权所有Copyright@2012-2018 LiangCeShiJi. All Rights Reserved 良策世纪 京ICP备09004321号-2</li>
+					</ul>
+					<div class="qw_code col-lg-2 col-md-2  col-xs-12"><img src="../img/code.png" alt=""></div>
+				</div>
+			</div>
+		</footer>
 </body>
 <script src="../js/jquery-1.9.1.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -170,7 +164,7 @@
 		  var id=uitll.getQueryString("id")
 	   	  uitll.getdata("/text/"+id, "get", "json", "", "false", "true", function(data) {
 	   	  	$(".nr_box h1").text(data.data.title)
-	         $(".nr_title li").eq(0).find("em").text(data.data.date)
+	         $(".nr_title li").eq(0).find("em").text(data.data.date.substring(0,10))
 	         $(".nr_title li").eq(1).find("em").text(data.data.place)
 	         $(".nr_title li").eq(2).find("em").text(data.data.total)
 	         $(".nr_wz").html(data.data.content)

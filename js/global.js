@@ -28,8 +28,42 @@ $(function() {
 	$(".lice_ziy").mouseleave(function() {
 		$(this).css("height", "100%")
 	})
-	//  公共方法
+	window.onscroll = function() {scrollFunction()};
+	 
+	function scrollFunction() {
+	    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+	        $(".sidebar_box").css("right","0")
+	    } else {
+	        $(".sidebar_box").css("right","-100px")
+	    }
+	}
+		
+	
+	var flobalurl = location.href;
+	if (flobalurl.indexOf('pages') >=1) {
+		var pagestm='<ul class="sidebar_box">'+
+		              '<li class="fix">'+
+		                  '<div class="sib_iocnbox">'+'<img src="../img/sidebar1.iocn.png" alt="" />'+'</div>'+
+		                  '<div class="sib_nrbox">'+'<p>010-66081702</p>'+'</div>'
+		               +'</li>'+
+		               '<li class="fix">'+
+		                  '<div class="sib_iocnbox">'+'<img src="../img/sidebar2.iocn.png" alt="" />'+'</div>'+
+		                  '<div class="sib_weix">'+'<img src="../img/code.png" alt="" />'+'</div>'
+		               +'</li>'+
+		               '<li class="fix">'+
+		                  '<div class="sib_iocnbox">'+'<img src="../img/sidebar3.iocn.png" alt="" />'+'</div>'+
+		                  '<div class="sib_nrbox">'+'<p>lc7166@163.com</p>'+'</div>'
+		               +'</li>'+
+		               '<li class="fix">'+
+		                  '<div class="sib_iocnbox" id="sidebar_top">'+'<img src="../img/sidebar4.iocn.png" alt="" />'+'</div>'
+		               +'</li>'
+		          +'</ul'
+		$("body").append(pagestm)          
 
+    }
+	$("body").on("click","#sidebar_top",function(){
+	  	  $('html, body').animate({scrollTop: 0}, 700)
+    })
 })
 var globaluri = "http://www.liangceshiji.com:8080/front"
 var uitll = {

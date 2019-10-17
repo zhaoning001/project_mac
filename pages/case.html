@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>良策案例</title>
-	    <link rel="shortcut icon" type="image/x-icon" href="../img/naviocn.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="../img/naviocn.ico" />
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/comm.css" />
 	</head>
@@ -46,8 +46,8 @@
 		.case_smlltitle {
 			width: 60%;
 			overflow: hidden;
-			display: block;
-            margin: 0 auto;			
+			display: none;
+			margin: 0 auto;
 		}
 		
 		.case_smlltitle li {
@@ -56,9 +56,11 @@
 			cursor: pointer;
 			float: left;
 		}
-		.case_smlltitle li:hover span{
+		
+		.case_smlltitle li:hover span {
 			color: #BF1A20;
 		}
+		
 		.case_smlltitle em {
 			display: block;
 			width: 6px;
@@ -122,6 +124,10 @@
 			margin-top: 50px;
 		}
 		
+		.caseli_active span {
+			color: #BF1A20 !important;
+		}
+		
 		@media only screen and (max-width: 992px) {
 			.case_title li {
 				font-size: 22px;
@@ -130,7 +136,9 @@
 				top: 73px;
 				left: 49px;
 			}
-			.case_smlltitle{width: 75%;}
+			.case_smlltitle {
+				width: 75%;
+			}
 		}
 		
 		@media only screen and (max-width: 768px) {
@@ -164,7 +172,9 @@
 			.case_smlltitle em {
 				margin-top: 5px;
 			}
-            .case_smlltitle{width: 84%;}
+			.case_smlltitle {
+				width: 84%;
+			}
 		}
 	</style>
 
@@ -255,13 +265,13 @@
 				</ul>
 				<div class="case_smllbox">
 					<ul class="case_smlltitle">
-						
+
 					</ul>
 					<ul class="case_smlltitle">
-						
+
 					</ul>
 					<ul class="case_smlltitle">
-						
+
 					</ul>
 				</div>
 				<ul class="case_nr">
@@ -278,16 +288,14 @@
 			<div class="container">
 				<div class="row footer_row">
 					<ul class="xinx_box col-lg-10 col-md-10 col-sm-12">
-						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn1.png) no-repeat left center;">联系电话：010-66081702 010-66081708
-						</li>
-						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn2.png) no-repeat left center;">联系电话：13810331642 13011182699
-						</li>
-						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn3.png) no-repeat left center;">北京市朝阳区劲松街道南磨房路39号院</li>
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn1.png) no-repeat left center;">贵宾专线：010-66081702&nbsp&nbsp&nbsp 010-66081708</li>
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn2.png) no-repeat left center;">24小时在线：13810331642&nbsp&nbsp 13011182699</li>
+						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn3.png) no-repeat left center;">北京市朝阳区南磨房路39号院</li>
 						<li class="col-lg-5 col-md-6  col-xs-12" style="background: url(../img/iocn4.png) no-repeat left center;">E-mail：lc7166@163.com</li>
 						<li class="col-lg-12 col-md-12 col-xs-12" style="background: url(../img/iocn5.png) no-repeat left center;">版权所有Copyright@2012-2018 LiangCeShiJi. All Rights Reserved 良策世纪 京ICP备09004321号-2</li>
 					</ul>
 					<div class="qw_code col-lg-2 col-md-2  col-xs-12"><img src="../img/code.png" alt=""></div>
-				</div>x`
+				</div>
 			</div>
 		</footer>
 	</body>
@@ -297,29 +305,33 @@
 	<script src="../js/global.js"></script>
 	<script>
 		$(function() {
+			//获取url参数
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return(r[2]);
+				return null;
+			}
+
+			sbmenu(0)
+			sbmenu(1)
+			sbmenu(2)
 			$(".b_nav").click(function() {
 				$(this).addClass("title_active").siblings().removeClass("title_active")
 				nav($(this).index())
-//				if($(this).index() > 0) {
-//					$(".case_smllbox").css("display", "block")
-//					$(".case_smlltitle").eq($(this).index() - 1).css("display", "flex").siblings().css("display", "none")
-//					sbmenu($(this).index()-1)
-//				} else {
-					$(".case_smllbox").css("display", "none")
-//				}
+				$(".case_smllbox").css("display", "none")
 			})
-			$(".s_nav").mouseenter(function(){
-				    $(this).addClass("title_active").siblings().removeClass("title_active")
-				    $(".case_smllbox").css("display", "block")
-					$(".case_smlltitle").eq($(this).index() - 1).css("display", "block").siblings().css("display", "none")
-					sbmenu($(this).index()-1)
+			$(".s_nav").mouseenter(function() {
+				$(this).addClass("title_active").siblings().removeClass("title_active")
+				$(".case_smllbox").css("display", "block")
+				$(".case_smlltitle").eq($(this).index() - 1).css("display", "block").siblings().css("display", "none")
 			})
-			$(".case_smlltitle").on("click","li",function(){
-				var id=$(this).attr("dataid")
-			    var index=$(this).parent().index()
-				listnav(index,id,"1")
+			$(".case_smlltitle").on("click", "li", function() {
+				var id = $(this).attr("dataid")
+				listnav(id, "1")
+				$(this).addClass("caseli_active").siblings().removeClass("caseli_active")
 			})
-			
+
 			var anlidata = {
 				"type": "banner"
 			}
@@ -329,30 +341,40 @@
 			})
 
 			function sbmenu(index) {
-				var sbtupe=["product","activity","sense"]
+				var sbtupe = ["product", "activity", "sense"]
 				var anlidata = {
 					"type": sbtupe[index]
-				}	
+				}
 				uitll.getdata("/menu?", "get", "json", anlidata, "false", "true", function(data) {
 					$(".case_smlltitle").eq(index).empty()
-					$.each(data.data,function(i,val){
-						var sbtempate="<li dataid="+ val.id +">"+
-						                "<em>"+"</em>"+
-						                "<span>"+val.name+"</span>"
-				                 	  +"</li>"
-					    $(".case_smlltitle").eq(index).append(sbtempate)
+					$.each(data.data, function(i, val) {
+						if(val.id ==getQueryString("id")) {
+							var sbtempate = "<li dataid=" + val.id + ">" +
+								"<em>" + "</em>" +
+								"<span style='color:#BF1A20'>" + val.name + "</span>" +
+								"</li>"
+							$(".case_title li").eq(index + 1).addClass("title_active").siblings().removeClass("title_active")
+							$(".case_smllbox").css("display", "block")
+							$(".case_smlltitle").eq(index).css("display", "block")
+							listnav(val.id,1)
+						} else {
+							var sbtempate = "<li dataid=" + val.id + ">" +
+								"<em>" + "</em>" +
+								"<span>" + val.name + "</span>" +
+								"</li>"
+						}
+						$(".case_smlltitle").eq(index).append(sbtempate)
 					})
-					
 				})
 			}
-			function smlistnav(index,id,pages){
-				var listurl=["/product?","/activity?","/sense?"]
+
+			function smlistnav(id, pages) {
 				var navdata = {
-					"type":id,
+					"type": id,
 					"page": pages,
 					"limit": "6"
 				}
-				uitll.getdata(listurl[index], "get", "json", navdata, "false", "true", function(data) {
+				uitll.getdata("/mlist?", "get", "json", navdata, "false", "true", function(data) {
 					$(".case_nr").empty()
 					if(data.data.length > 0) {
 						$.each(data.data, function(i, val) {
@@ -371,14 +393,14 @@
 					}
 				})
 			}
-			function listnav(index,id,pages){
-				var listurl=["/product?","/activity?","/sense?"]
+
+			function listnav(id, pages) {
 				var navdata = {
-					"type":id,
+					"type": id,
 					"page": pages,
 					"limit": "6"
 				}
-				uitll.getdata(listurl[index], "get", "json", navdata, "false", "true", function(data) {
+				uitll.getdata("/mlist?", "get", "json", navdata, "false", "true", function(data) {
 					$(".case_nr").empty()
 					if(data.data.length > 0) {
 						$.each(data.data, function(i, val) {
@@ -405,15 +427,11 @@
 						prevContent: '上页',
 						nextContent: '下页',
 						callback: function(api) {
-							smlistnav(index,id,api.getCurrent())
+							smlistnav(id, api.getCurrent())
 						}
 					});
 				})
 			}
-			
-			
-			
-			
 
 			function smnav(index, pages) {
 				var canarray = ["manage", "product", "activity", "sense"]
@@ -481,8 +499,9 @@
 					});
 				})
 			}
-			nav(0, 1)
-
+            if(getQueryString("id")==null){
+              	nav(0, 1)
+            }
 		})
 	</script>
 
