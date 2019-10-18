@@ -201,7 +201,7 @@ $(function() {
 	})
 	//    圆环
 	function create_circle(num, val_num) {
-		let wid = $(window).width()
+	    let wid = $(window).width()
 		if(wid < 1000) {
 			//
 			if(wid < 768) {

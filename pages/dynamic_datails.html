@@ -13,12 +13,12 @@
 <style>
     .nr_box{margin-bottom: 64px;}
     .nr_box h1{font-size: 36px;width: 100%;font-weight: normal;text-align: center;margin-top: 70px;}
-    .nr_title{overflow:hidden;border-bottom:1px solid #BF1A20;}
-    .nr_title li{font-size: 18px;margin-left: 70px;float: left;margin-bottom: 16px;}
+    .nr_title{overflow:hidden;border-bottom:1px solid #BF1A20;display: flex;justify-content: center;}
+    .nr_title li{font-size: 18px;margin-left: 70px;;margin-bottom: 16px;}
     .nr_title li em{margin-left: 4px;}
     .line{display: block;width: 100px;height: 6px;background: #BF1A20;margin: 20px auto 36px;}
     .nr_wz{margin-top:63px;}
-    .nr_wz p{font-size: 20px;line-height: 48px;text-indent: 40px;}
+    .nr_wz p{font-size: 16px;line-height: 48px;text-indent: 40px;}
     .nr_wz img{width: 100%;margin-top: 40px;}
     @media only screen and (max-width: 1199px) {
        .nr_title li{margin-left: 51px;}
@@ -122,7 +122,7 @@
             <h1></h1>
             <span class="line"></span>
             <ul class="nr_title">
-                <li>发布日期：<em></em></li>
+                <li>活动日期：<em></em></li>
                 <li>活动地点：<em></em></li>
                 <li>活动人数：<em></em></li>
             </ul>
@@ -162,7 +162,7 @@
 		  var id=uitll.getQueryString("id")
 	   	  uitll.getdata("/text/"+id, "get", "json", "", "false", "true", function(data) {
 	   	  	$(".nr_box h1").text(data.data.title)
-	         $(".nr_title li").eq(0).find("em").text(data.data.date)
+	         $(".nr_title li").eq(0).find("em").text(data.data.date.substring(0,10))
 	         $(".nr_title li").eq(1).find("em").text(data.data.place)
 	         $(".nr_title li").eq(2).find("em").text(data.data.total)
 	         $(".nr_wz").html(data.data.content)

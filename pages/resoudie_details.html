@@ -30,12 +30,11 @@
 			margin: 20px auto;
 		}
 		
-		.zhe_wz span {
+		.zhe_wz>span {
 			width: 100%;
 			text-align: center;
 			display: block;
 			font-size: 18px;
-			margin-bottom: 83px;
 		}
 		
 		.big_logo {
@@ -48,13 +47,14 @@
 		
 		.resou_deswz img {
 			width: 100%;
-			margin-bottom: 52px;
 		}
 		
 		.resou_deswz p {
-			font-size: 20px;
+			font-size: 17px;
 			line-height: 48px;
 			width: 100%;
+			margin-top: 22px;
+			
 		}
 		
 		@media only screen and (max-width:768px) {
@@ -187,7 +187,7 @@
 			var id = uitll.getQueryString("id")
 			uitll.getdata("/text/" + id, "get", "json", "", "false", "true", function(data) {
 				$(".zhe_wz h1").text(data.data.title)
-				$(".nr_title li").eq(0).find("em").text(data.data.date)
+				$(".nr_title li").eq(0).find("em").text(data.data.date.substring(0,10))
 				$(".resou_deswz").html(data.data.content)
 			})
 		})
